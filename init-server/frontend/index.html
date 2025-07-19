@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Login</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="../js/script.js" defer></script>
+    <script src="./js/script.js" defer></script>
 </head>
 <body>
     <div class="login-container">
-        <form class="login-form">
+        <form id="loginForm" class="login-form">
             <h2>Daniel Castellanos</h2>
             <div class="input-group">
                 <label for="username">Usuario</label>
@@ -19,7 +19,7 @@
                 <label for="password">Contraseña</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <button type="submit" onclick="register()">Enviar</button>
+            <button type="submit">Enviar</button>
         </form>
     </div>
 </body>
