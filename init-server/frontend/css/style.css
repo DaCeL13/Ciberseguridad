@@ -68,6 +68,7 @@ button:hover {
     color: red;
     margin-top: 10px;
     font-size: 0.9em;
+    /* display: none; */
 }
 
 .pokemon-result {
@@ -77,16 +78,7 @@ button:hover {
     border-radius: 8px;
     text-align: left;
     background-color: #f9f9f9;
-}
-
-.pokemon-result img {
-    max-width: 150px;
-    height: auto;
-    display: block;
-    margin: 0 auto 15px auto;
-    background-color: #e0e0e0;
-    border-radius: 5px;
-    padding: 10px;
+    display: none;
 }
 
 .pokemon-info p {
@@ -96,4 +88,48 @@ button:hover {
 
 .pokemon-info strong {
     color: #007bff;
+}
+
+.pokemon-card {
+    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10), 0 1.5px 4px rgba(0,0,0,0.08);
+    padding: 24px 18px 18px 18px;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 320px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.pokemon-card:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.16), 0 3px 8px rgba(0,0,0,0.12);
+}
+
+.pokemon-card img {
+    background: #fff;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    margin-bottom: 12px;
+    max-width: 180px; /* Aumentado */
+    padding: 12px;    /* Aumentado */
+}
+
+.pokemon-card h3 {
+    margin: 10px 0 8px 0;
+    font-size: 1.5em;
+    color: #333;
+    letter-spacing: 1px;
+    text-shadow: 0 1px 0 #fff;
+}
+
+.pokemon-card p {
+    margin: 6px 0;
+    color: #444;
+    font-size: 1.05em;
+}
+
+.pokemon-card strong {
+    color: #e17055;
 }
