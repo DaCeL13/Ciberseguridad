@@ -21,4 +21,16 @@ function register(event) {
     }
 }
 
+function onSubmit(token) {
+    document.getElementById("loginForm").submit();
+}
+
 document.getElementById('loginForm').addEventListener('submit', register);
+
+// Ejemplo simple en tu script.js
+// document.getElementById('loginForm').addEventListener('submit', function(event) {
+//     if (grecaptcha.getResponse() === "") {
+//         event.preventDefault();
+//         alert("Por favor, verifica el captcha.");
+//     }
+// });

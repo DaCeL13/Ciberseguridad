@@ -65,10 +65,10 @@ button:hover {
 }
 
 .error-message {
-    color: red;
+    color: #e74c3c;
     margin-top: 10px;
-    font-size: 0.9em;
-    /* display: none; */
+    font-size: 1em;
+    text-align: center;
 }
 
 .pokemon-result {
@@ -133,4 +133,19 @@ button:hover {
 
 .pokemon-card strong {
     color: #ffffff;
+}
+
+/* Ajusta el grupo del captcha para que se vea alineado y con espacio */
+.input-group .g-recaptcha {
+    margin: 18px 0 10px 0;
+    display: flex;
+    justify-content: center;
+}
+
+/* Opcional: mejora el botón de enviar cuando está debajo del captcha */
+.login-form button[type="submit"] {
+    margin-top: 18px;
+    width: 100%;
+    font-size: 1.1em;
+    padding: 12px 0;
 }
