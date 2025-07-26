@@ -3,6 +3,8 @@ from app.db.base import Base
 from app.db.session import engine
 from fastapi.middleware.cors import CORSMiddleware
 from app.api.v1.routes import health
+from app.exceptions.custom_exceptions import NotFoundException, DatabaseConnectionException
+from app.exceptions.handlers import not_found_exception_handler, db_connection_exception_handler
 
 tags_metadata = [
     {
@@ -17,6 +19,8 @@ tags_metadata = [
 # Crear la instancia de FastAPI
 app = FastAPI(title="Initial Server API", version="1.0.0", openapi_tags=tags_metadata)
 
+app.add_exception_handler(DatabaseConnectionException, db_connection_exception_handler)
+app.add_exception_handler(NotFoundException, not_found_exception_handler)
 # Crear un router para las rutas de la API
 v1_router = APIRouter(prefix="/api/v1")
 v1_router.include_router(health.router)
@@ -37,30 +41,6 @@ app.add_middleware(
 
 # Create tables
 Base.metadata.create_all(bind=engine)
-
-
-# Modelo de datos de Pydantic para la validación de la API
-# class UserBase(BaseModel):
-#     username: str
-#     password: str
-
-# class UserCreate(UserBase):
-#     pass
-
-# class User(UserBase):
-#     id: int
-#     class Config:
-#         orm_mode = True
-
-# # Modelo de datos de SQLAlchemy para la tabla de la base de datos
-# class DBUser(Base):
-#     __tablename__ = "users"
-#     id = Column(Integer, primary_key=True, index=True)
-#     username = Column(String(50))
-#     password = Column(String(255))
-
-# # Crea la tabla en la base de datos si no existe
-# Base.metadata.create_all(bind=engine)
 
 
 @app.get("/")
