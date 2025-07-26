@@ -1,8 +1,10 @@
-from sqlalchemy.ext.declarative import as_declarative, declared_attr
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from sqlalchemy.ext.declarative import declared_attr
 
-@as_declarative()
-class Base:
-    id: int
+# Esta clase sirve como base para todos los modelos de SQLAlchemy.
+class Base(DeclarativeBase):
+    # Definición de la columna ID
+    id: Mapped[int] = mapped_column(primary_key=True, index=True)
     __name__: str
 
     @declared_attr
