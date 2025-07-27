@@ -79,7 +79,7 @@ responses = {
       "content": {
         "application/json": {
           "example": {
-            "status": "success",
+            "status": "created",
             "message": "Usuario registrado",
             "data": {
               "username": "user1",
