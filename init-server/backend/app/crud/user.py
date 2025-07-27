@@ -10,10 +10,16 @@ def create_user(user: UserCreate, db: Session):
     return UserOut.model_validate(db_user)
 
 def get_user_by_id(user_id: int, db: Session):
-    return UserOut.model_validate(db.query(User).filter(User.id == user_id).first())
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        return None
+    return UserOut.model_validate(user)
 
 def get_all_users(db: Session, skip: int = 0, limit: int = 100):
-    return [UserOut.model_validate(user) for user in db.query(User).offset(skip).limit(limit).all()]
+    users = db.query(User).offset(skip).limit(limit).all()
+    if not users:
+        return []
+    return [UserOut.model_validate(user) for user in users]
 
 # def get_user_by_username(username: str, db: Session):
 #     return db.query(User).filter(User.username == username).first()
