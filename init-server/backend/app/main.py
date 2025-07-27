@@ -2,10 +2,10 @@ from fastapi import FastAPI, APIRouter, Form
 from app.db.base import Base
 from app.db.session import engine
 from fastapi.middleware.cors import CORSMiddleware
-from app.api.v1.routes import health
+from app.api.v1.routes import health, user
 from app.exceptions.custom_exceptions import NotFoundException, DatabaseConnectionException
 from app.exceptions.handlers import not_found_exception_handler, db_connection_exception_handler
-
+# Metadatos para la documentación de OpenAPI
 tags_metadata = [
     {
         "name": "Health",
@@ -18,16 +18,15 @@ tags_metadata = [
 ]
 # Crear la instancia de FastAPI
 app = FastAPI(title="Initial Server API", version="1.0.0", openapi_tags=tags_metadata)
-
+# Configurar los manejadores de excepciones
 app.add_exception_handler(DatabaseConnectionException, db_connection_exception_handler)
 app.add_exception_handler(NotFoundException, not_found_exception_handler)
 # Crear un router para las rutas de la API
 v1_router = APIRouter(prefix="/api/v1")
 v1_router.include_router(health.router)
-
+v1_router.include_router(user.router)
 # Registrar el router health en la aplicación principal
 app.include_router(v1_router)
-
 # Configurar CORS para permitir solicitudes desde el frontend
 app.add_middleware(
     CORSMiddleware,
@@ -36,17 +35,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# Register exception handlers
-
 # Create tables
 Base.metadata.create_all(bind=engine)
-
-
 @app.get("/")
 def read_root():
     return {"message": "Hola Daniel Castellanos, tu API 'main.py' está viva"}
-
 @app.post("/login")
 def login(username: str = Form(...), password: str = Form(...)):
     # if username == "admin" and password == "secret":

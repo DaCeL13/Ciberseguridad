@@ -4,9 +4,9 @@ from sqlalchemy.exc import SQLAlchemyError
 from app.db.session import SessionLocal
 from app.utils.response import APIResponse
 from app.exceptions.custom_exceptions import DatabaseConnectionException
-
+# Crear un router para las rutas de testeo de salud
 router = APIRouter(tags=["Health"], prefix="/health")
-
+# Endpoint para verificar la conexión a la base de datos
 @router.get("/db")
 def check_database():
     try:

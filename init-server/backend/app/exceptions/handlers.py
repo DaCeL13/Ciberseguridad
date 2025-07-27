@@ -8,7 +8,7 @@ def not_found_exception_handler(request: Request, exc: NotFoundException):
         status_code=404,
         content={
             "status": "error",
-            "message": f"{exc.name} not found",
+            "message": f"{exc.name} no encontrado",
             "data": None
         }
     )
