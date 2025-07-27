@@ -31,7 +31,7 @@ app.include_router(v1_router)
 # Configurar CORS para permitir solicitudes desde el frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost"],  # Permitir todos los orígenes
+    allow_origins=["http://127.0.0.1:5500"],  # Permitir todos los orígenes
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
