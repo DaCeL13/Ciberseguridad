@@ -63,31 +63,39 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
+    const payload = {
+        username: username,
+        password: password
+    };
     // Aquí puedes agregar la lógica para manejar el envío del formulario
-    fetch('http://localhost:8000/login', {
+    fetch('http://localhost:8000/api/v1/users/register', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
         },
-        body: new URLSearchParams({
-            'username': username,
-            'password': password
-        })
+        body: JSON.stringify(payload)
     })
     .then(response => {
         console.log('Respuesta del servidor:', response);
-        return response.json()
+        return response.json();
     })
     .then(data => {
         console.log('Éxito:', data);
-        alert(data.message); // Muestra el mensaje de éxito
-        // Aquí puedes redirigir o realizar otras acciones según la respuesta del servidor
-        if (data.success) {
+
+        // Muestra el mensaje retornado por el backend
+        alert(data.message || 'Registro exitoso');
+
+        // Valida por "status": "created"
+        if (data.status === 'created') {
+            // Redirecciona si el registro fue exitoso
             window.location.href = 'pokemon.html';
+        } else {
+            console.warn('Estado no esperado:', data.status);
         }
     })
     .catch((error) => {
         console.error('Error:', error);
-        alert('Error al iniciar sesión.'); // Muestra un mensaje de error
+        alert('Error al registrar usuario.');
     });
 });
