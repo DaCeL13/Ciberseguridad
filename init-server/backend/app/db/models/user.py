@@ -9,6 +9,7 @@ class User(Base):
     # ^^^ Este campo es heredado de la clase Base y no es necesario declararlo aquí.
     
     username = Column(String, unique=True, index=True, nullable=False)
+    email = Column(String, unique=True, index=True, nullable=False)
     password = Column(String, nullable=False) # Nota: Guarda el hash de la contraseña, no el texto plano
     # Delega la creación de la columna created_at a la clase Base con NOW() como valor por defecto
     created_at = Column(DateTime, server_default=func.now())
