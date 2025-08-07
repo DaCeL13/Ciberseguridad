@@ -8,6 +8,30 @@ from app.utils.response import APIResponse
 from app.exceptions.custom_exceptions import DatabaseConnectionException
 # Crear un router para las rutas de testeo de salud
 router = APIRouter(tags=["Health"], prefix="/health")
+# Endpoint para verificar el estado del sistema
+@router.get(
+    "/", summary="Check System Health",
+    description="Verifica el estado del sistema y devuelve un mensaje de éxito.",
+    responses={
+        status.HTTP_200_OK: {
+            "description": "Sistema operativo y servidor funcionando correctamente",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "status": "ok",
+                        "message": "Sistema operativo y servidor funcionando correctamente",
+                        "data": None
+                    }
+                }
+            }
+        }
+    }
+)
+def check_health():
+    return JSONResponse(
+        status_code=status.HTTP_200_OK,
+        content=jsonable_encoder(APIResponse(status="ok", message="Sistema operativo y servidor funcionando correctamente"))
+    )   
 # Endpoint para verificar la conexión a la base de datos
 @router.get(
     "/db", summary="Check Database Connection",
