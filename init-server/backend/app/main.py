@@ -1,4 +1,5 @@
 from fastapi import FastAPI, APIRouter, Form
+from fastapi.responses import RedirectResponse
 from app.db.base import Base
 from app.db.session import engine
 from fastapi.middleware.cors import CORSMiddleware
@@ -31,8 +32,14 @@ app.include_router(v1_router)
 # Configurar CORS para permitir solicitudes desde el frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://127.0.0.1:5500"],  # Permitir todos los orígenes
+    allow_origins=["http://127.0.0.1:5500"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Redirección desde raíz
+@app.get("/", include_in_schema=False)
+def redirect_to_health():
+    return RedirectResponse(url="/api/v1/health/", status_code=301)
+
